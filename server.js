@@ -38,18 +38,39 @@ let defaultDatabase = firebase.database();
 // ruta a la base de datos
 let noticiasRef = defaultDatabase.ref("noticias");
 
-////////////////////////////////
+
 
 /////////////////////////////////
 // recoge el objeto de firebase y lo mete en la variable noticias
 
 server.get('/loadNoticias', (req, res) => {
+
     noticiasRef.once('value', function(snapshot) {
         let noticias = Object.values( snapshot.val() );
             //codigo de firebase necesario 
             res.send(noticias);        
     });
 });
+
+// probando enviar noticias
+
+// POST method route
+server.post('/cargarNoticias', function (req, res) {
+   let nuevaNoticia = firebase.database().ref("noticias").push(nuevaNoticia);
+  //noticiasRef.once('value', function(snapshot) {
+   // let nuevaNoticia = Object.values( snapshot.val() );
+
+           res.send(nuevaNoticia);
+           
+          });
+          
+
+//});
+
+firebase.database().ref("noticias").push(nuevaNoticia);
+// termino de probar enviar noticias
+
+
 /*
 const noticias = [
     {
@@ -74,8 +95,12 @@ const noticias = [
     ];
 */
 
+// funcion meter nuevos datos
+
+
+
+// termina funcion enviar nuevos datos
+
     //apiresty
 
-    
-
-    server.listen(listenPort, () => console.log(`Server listening on ${listenPort}`));
+      server.listen(listenPort, () => console.log(`Server listening on ${listenPort}`));

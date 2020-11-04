@@ -1,3 +1,6 @@
+let firebase = require('firebase');
+// todos los require deben ir los primeros
+
 const express = require('express');
 const bodyParser = require('body-parser');
 
@@ -30,8 +33,8 @@ function init(){
   init();  
 
 // base de datos por defecto
-let Firebase = require('firebase');
-let defaultDatabase = Firebase.database();
+
+let defaultDatabase = firebase.database();
 // ruta a la base de datos
 let noticiasRef = defaultDatabase.ref("noticias");
 
@@ -40,9 +43,13 @@ let noticiasRef = defaultDatabase.ref("noticias");
 /////////////////////////////////
 // recoge el objeto de firebase y lo mete en la variable noticias
 
-noticiasRef.on('value', function(snapshot) {
-    let noticias = Object.values( snapshot.val() );
-  });
+server.get('/loadNoticias', (req, res) => {
+    noticiasRef.once('value', function(snapshot) {
+        let noticias = Object.values( snapshot.val() );
+            //codigo de firebase necesario 
+            res.send(noticias);        
+    });
+});
 /*
 const noticias = [
     {
@@ -69,11 +76,6 @@ const noticias = [
 
     //apiresty
 
-    server.get('/loadNoticias', (req, res) => {
-
-        //codigo de firebase necesario 
-
-        res.send(noticias);
-    });
+    
 
     server.listen(listenPort, () => console.log(`Server listening on ${listenPort}`));

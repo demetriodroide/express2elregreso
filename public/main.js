@@ -34,7 +34,7 @@ async function getNoticias(){
 // envio datos desde JS a firebase con input HTML
 
 
-let boton = document.querySelector("#pulsar").addEventListener("click",enviardatos);
+document.querySelector("#pulsar").addEventListener("click",enviardatos);
 
 function enviardatos() {
 
@@ -46,26 +46,16 @@ function enviardatos() {
     "descripcion" : `${ descripcion }`,
   }
 
-async function enviarNoticias(){
-    
-  let response = await fetch('http://localhost:8080/cargarNoticias', {method: 'POST'})
-  nuevaNoticia = await response.json();
-  
-  //console.log(titulo);
-  //console.log(descripcion);
-  
-    
+  enviarNoticias(nuevaNoticia);
 }
-    enviarNoticias();
-    //
 
-  };
-
-  enviardatos();
-
-
-
-
-
-
-
+async function enviarNoticias(noticiaEnviada){
+      
+  await fetch('http://localhost:8080/cargarNoticias', {
+    method: 'POST',
+    headers: {
+            'Content-Type': 'application/json',
+    },
+    body: JSON.stringify(noticiaEnviada)
+  })
+}

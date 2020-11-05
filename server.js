@@ -61,13 +61,13 @@ server.get('/loadNoticias', (req, res) => {
  
 // POST method route
 server.post('/cargarNoticias', (req, res) => {
-
-//coger noticia del endpoint ( body )
+console.log(req.body)
+    //coger noticia del endpoint ( body )
+    let noticiaRecibida = req.body;
 
     //aqui esta la chicha
-    firebase.database().ref("noticias").push(nuevaNoticia);
+    firebase.database().ref("noticias").push(noticiaRecibida);
 
-  res.send(nuevaNoticia);
 });
 // termino de probar enviar noticias
 

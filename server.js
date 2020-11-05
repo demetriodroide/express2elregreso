@@ -68,6 +68,7 @@ console.log(req.body)
     //aqui esta la chicha
     firebase.database().ref("noticias").push(noticiaRecibida);
 
+    res.send("ok")
 });
 // termino de probar enviar noticias
 

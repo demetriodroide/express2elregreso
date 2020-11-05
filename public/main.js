@@ -51,7 +51,8 @@ function enviardatos() {
 
 async function enviarNoticias(noticiaEnviada){
       
-  await fetch('http://localhost:8080/cargarNoticias', {
+  
+  .await fetch('http://localhost:8080/cargarNoticias', {
     method: 'POST',
     headers: {
             'Content-Type': 'application/json',

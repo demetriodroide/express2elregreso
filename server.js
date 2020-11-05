@@ -54,21 +54,23 @@ server.get('/loadNoticias', (req, res) => {
 
 // probando enviar noticias
 
+//pusea la noticia en la varibale nuevaNoticia
+
+// esto creo q queda obsoleto
+
+ 
 // POST method route
-server.post('/cargarNoticias', function (req, res) {
-   let nuevaNoticia = firebase.database().ref("noticias").push(nuevaNoticia);
-  //noticiasRef.once('value', function(snapshot) {
-   // let nuevaNoticia = Object.values( snapshot.val() );
+server.post('/cargarNoticias', (req, res) => {
 
-           res.send(nuevaNoticia);
-           
-          });
-          
+//coger noticia del endpoint ( body )
 
-//});
+    //aqui esta la chicha
+    firebase.database().ref("noticias").push(nuevaNoticia);
 
-firebase.database().ref("noticias").push(nuevaNoticia);
+  res.send(nuevaNoticia);
+});
 // termino de probar enviar noticias
+
 
 
 /*

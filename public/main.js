@@ -60,3 +60,57 @@ async function enviarNoticias(noticiaEnviada){
     body: JSON.stringify(noticiaEnviada)
   })
 }
+//
+
+document.querySelector("#pulsarparaactualizar").addEventListener("click",enviardatosactualizados);
+
+function enviardatosactualizados() {
+
+  let titulo = document.querySelector("#titulolabel").value;
+  let descripcion = document.querySelector("#titulotexto").value;
+  
+  let nuevaNoticiaactualizada = {
+    "titulo"      : `${ titulo }`,
+    "descripcion" : `${ descripcion }`,
+  }
+
+  enviarUpdates(nuevaNoticiaactualizada);
+}
+
+
+async function enviarUpdates(){
+
+await fetch('http://localhost:8080/updateNoticias', {
+    method: 'put',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({ "4" : 
+
+    {  
+           "descripcion": "la noticia numero dos",
+           "titulo": "esta actualiza22222333333334444444444"
+       }
+   
+   
+   
+   })
+  })
+}
+
+
+///////////
+// DELTE
+document.querySelector("#pulsarparaeliminar").addEventListener("click",enviardatoseliminados);
+
+function enviardatoseliminados(){
+
+enviardatoseliminadosahorais();
+
+}
+async function enviardatoseliminadosahorais(){
+
+  await fetch('http://localhost:8080/deleteNoticias', {
+      method: 'delete',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ "noticia" : "0" })
+    })
+  }

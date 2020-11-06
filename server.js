@@ -52,13 +52,31 @@ server.get('/loadNoticias', (req, res) => {
     });
 });
 
+
+
+///////////////////
+// put method :)
+server.put('/updateNoticias', function (req, res) {
+    
+    let noticiaActualizada = req.body;
+    firebase.database().ref("noticias").update(noticiaActualizada);
+    
+    res.send('ok, fue actualizado')
+  })
+
+
+  ////////////////
+  // delete method
+  server.delete('/deleteNoticias', function (req, res) {
+    
+    let noticiaEliminada = req.body.noticia;
+    firebase.database().ref("noticias/"+noticiaEliminada).remove();
+    
+    res.send('ok , fue deleteado')
+  })
+
+
 // probando enviar noticias
-
-//pusea la noticia en la varibale nuevaNoticia
-
-// esto creo q queda obsoleto
-
- 
 // POST method route
 server.post('/cargarNoticias', (req, res) => {
 console.log(req.body)
@@ -71,6 +89,8 @@ console.log(req.body)
     res.send("ok")
 });
 // termino de probar enviar noticias
+
+
 
 
 
@@ -91,10 +111,7 @@ const noticias = [
         "descripcion":    "textil donde trabajan muchas personas"
     },
     
-    {
-        "titulo" :        "la fabrika",
-        "descripcion":    "textil donde trabajan muchas personas"
-    }
+    --
     ];
 */
 
